@@ -1,38 +1,52 @@
 package com.wildcodeschool.wildandwizard.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Course {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    public Course() {
-    }
+  private String name;
 
-    public Course(String name) {
-        this.name = name;
-    }
+  @ManyToMany(mappedBy = "courses")
+  private List<Wizard> wizards = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
+  public Course() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public List<Wizard> getWizards() {
+    return wizards;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setWizards(List<Wizard> wizards) {
+    this.wizards = wizards;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public Course(String name) {
+    this.name = name;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }
